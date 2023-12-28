@@ -23,7 +23,7 @@
 
 # Constants
 
-VERSION="1.0.1"
+VERSION="v1.0.2"
 
 
 # OPTIONS
@@ -46,6 +46,37 @@ ORANGE='\033[0;33m'
 LBLUE='\033[1;36m'
 NC='\033[0m'
 
+
+##### Flags ####
+
+while [ $# -gt 0 ]; do
+  case $1 in
+    -h | --help)
+    cat <<EOF
+Usage: ./$(basename "$0") [OPTION]
+Interface with the Security Tails API endpoint.
+
+    -h, --help      Display this help and exit
+    -v, --version   Output version information and exit
+EOF
+    exit
+    ;;
+    -v | --version)
+        cat <<EOF
+SecTrails $VERSION
+Copyright (C) 2023 Igor Zevnik
+EOF
+    exit
+    ;;
+    *)
+    cat <<EOF
+SecTrails: unrecognized option '$1'
+Try './$(basename "$0") --help' for more information.
+EOF
+    exit 1;;
+  esac
+  shift
+done
 
 # Prereq
 
@@ -113,7 +144,7 @@ init=false
 banner() {
     fig_display "SecTrails Script" "${LBLUE}"
 
-    printf "v${VERSION}\n"
+    printf "${VERSION}\n"
     if [ "$DEBUG" = true ]; then printf "${RED}DEBUG MODE ENABLED\n${NC}"; fi
     printf "\n"
 
