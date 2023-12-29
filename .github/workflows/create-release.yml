@@ -38,6 +38,8 @@ jobs:
           /repos/IgorZev/SecTrails/releases/latest \
           -q '.. | .tag_name')
 
+          echo $tag
+
           mkdir tmp
           chmod +x .github/prepare-notes.sh
           ./.github/prepare-notes.sh $tag
