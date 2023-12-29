@@ -1,0 +1,37 @@
+name: "tagged-release"
+
+on:
+  push:
+    tags:
+      - "v*"
+      - "!v*-*"
+
+permissions: write-all
+
+
+jobs:
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: "Prepare release"
+        run: |
+          ls -la
+          chmod +x .github/prepare-release.sh
+          ./.github/prepare-release.sh
+          ls -la bin
+
+      - name: "Create release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --notes "" \
+              --generate-notes \
+              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              ./bin/*
