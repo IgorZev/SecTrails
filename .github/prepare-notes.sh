@@ -1,8 +1,11 @@
 #!/bin/bash
 
-origin=$(git rev-parse origin/$1)
+origin=$(git rev-parse $1)
 
 local=$(git rev-parse HEAD)
+
+echo $origin
+echo $local
 
 logs_pre=$(git log $origin..$local --oneline)
 
