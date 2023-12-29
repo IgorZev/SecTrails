@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-logs_pre=$$q
+logs_pre="$@"
 
 printf "Changes:\n$logs_pre\n\nFiltering:\n"
 
