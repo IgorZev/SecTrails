@@ -29,11 +29,11 @@ jobs:
 
       - name: "Prepare notes"
         run: |
-          BASE_SHA=$(git rev-parse $GITHUB_BASE_REF)
-          HEAD_SHA=$(git rev-parse HEAD)
-          echo "$GITHUB_BASE_REF"
-          echo "Base SHA: $BASE_SHA"
-          echo "Head SHA: $HEAD_SHA"
+        
+          gh api \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/IgorZev/SecTrails/releases/latest
 
           mkdir tmp
           chmod +x .github/prepare-notes.sh
