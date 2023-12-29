@@ -41,7 +41,7 @@ jobs:
             /repos/IgorZev/SecTrails/releases/latest \
             | jq -r '.. | objects | select(.tag_name) | .tag_name')
           
-          comms=git rev-list origin/$TAG_NAME..$tag
+          comms=$(git rev-list origin/$TAG_NAME..$tag)
 
           mkdir tmp
           chmod +x .github/prepare-notes.sh
