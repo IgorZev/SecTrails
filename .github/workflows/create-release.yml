@@ -31,6 +31,7 @@ jobs:
         run: |
           BASE_SHA=$(git rev-parse $GITHUB_BASE_REF)
           HEAD_SHA=$(git rev-parse HEAD)
+          echo "$GITHUB_BASE_REF"
           echo "Base SHA: $BASE_SHA"
           echo "Head SHA: $HEAD_SHA"
 
