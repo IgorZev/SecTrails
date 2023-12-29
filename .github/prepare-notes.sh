@@ -1,13 +1,7 @@
 #!/bin/bash
 
-origin=$(git rev-parse origin/$1)
 
-local=$(git rev-parse HEAD)
-
-echo $origin
-echo $local
-
-logs_pre=$(git log $origin..$local --oneline)
+logs_pre=$$q
 
 printf "Changes:\n$logs_pre\n\nFiltering:\n"
 

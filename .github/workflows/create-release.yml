@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       
 
       - name: "Prepare release"
@@ -30,6 +32,7 @@ jobs:
     
       - name: "Prepare notes"
         env:
+          tag: ${{ github.ref_name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG_NAME=$(gh api \
@@ -38,10 +41,11 @@ jobs:
             /repos/IgorZev/SecTrails/releases/latest \
             | jq -r '.. | objects | select(.tag_name) | .tag_name')
           
+          comms=git rev-list origin/$TAG_NAME..$tag
 
           mkdir tmp
           chmod +x .github/prepare-notes.sh
-          ./.github/prepare-notes.sh $TAG_NAME
+          ./.github/prepare-notes.sh $comms
 
       - name: "Create release"
         env:
