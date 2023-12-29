@@ -30,4 +30,4 @@ jobs:
           gh release create "$tag" \
               --generate-notes \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              --targe="${GITHUB_REF##*/}"
+              --target="${GITHUB_REF##*/}"
