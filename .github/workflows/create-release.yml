@@ -36,7 +36,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/IgorZev/SecTrails/releases/latest \
-            -q '.. | .tag_name')
+            | jq -r '.. | .tag_name')
           echo "::set-output name=tag_name::$TAG_NAME"
     
       - name: "Prepare notes"
