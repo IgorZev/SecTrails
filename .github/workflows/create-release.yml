@@ -27,9 +27,11 @@ jobs:
           ls -la bin
 
       - name: "Prepare notes"
+        env:
+          tag: ${{ github.ref_name }}
         run: |
           chmod +x .github/prepare-notes.sh
-          ./.github/prepare-notes.sh
+          ./.github/prepare-notes.sh $tag
 
       - name: "Create release"
         env:
