@@ -12,6 +12,7 @@ permissions: write-all
 
 jobs:
   tagged-release:
+    if: contains(github.event.head_commit.message, 'Release:')
     name: "Tagged Release"
     runs-on: "ubuntu-latest"
 
@@ -27,12 +28,10 @@ jobs:
           ls -la bin
 
       - name: "Prepare notes"
-        env:
-          tag: ${{ github.ref_name }}
         run: |
           mkdir tmp
           chmod +x .github/prepare-notes.sh
-          ./.github/prepare-notes.sh $tag
+          ./.github/prepare-notes.sh $GITHUB_BASE_REF
 
       - name: "Create release"
         env:
