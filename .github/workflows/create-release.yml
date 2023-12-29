@@ -44,9 +44,11 @@ jobs:
 
           comms=$(git log $TAG_NAME..$tag --oneline)
 
+          echo "$comms"
+
           mkdir tmp
           chmod +x .github/prepare-notes.sh
-          ./.github/prepare-notes.sh $comms
+          ./.github/prepare-notes.sh "$comms"
 
       - name: "Create release"
         env:
