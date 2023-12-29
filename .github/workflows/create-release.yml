@@ -2,9 +2,10 @@ name: "tagged-release"
 
 on:
   push:
+    branches:
+      - "dev"
     tags:
-      - "v*"
-      - "!v*-*"
+      - "v*-dev"
 
 permissions: write-all
 
@@ -25,13 +26,19 @@ jobs:
           ./.github/prepare-release.sh
           ls -la bin
 
+      - name: "Prepare notes"
+        run: |
+          chmod +x .github/prepare-notes.sh
+          ./.github/prepare-notes.sh
+
       - name: "Create release"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
         run: |
           gh release create "$tag" \
-              --notes "" \
+              -d \
+              -F 'tmp/notes.md' \
               --generate-notes \
               --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
               ./bin/*
