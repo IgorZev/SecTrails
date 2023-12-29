@@ -1,7 +1,6 @@
 #!/bin/bash
 
-origin=$(git rev-parse $1)
-echo $1
+origin=$(git rev-parse origin/$1)
 
 local=$(git rev-parse HEAD)
 
