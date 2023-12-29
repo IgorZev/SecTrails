@@ -28,6 +28,9 @@ exec 3>&1
     zip bin/SecTrails-linux-arm64.zip bin/SecTrails-linux-arm64 
     zip bin/SecTrails-linux-amd64.zip bin/SecTrails-linux-amd64
 
+    rm -rf bin/SecTrails-linux-arm64
+    rm -rf bin/SecTrails-linux-amd64
+
     sha256sum bin/SecTrails-linux-arm64.zip > bin/sha256sums
     sha256sum bin/SecTrails-linux-amd64.zip >> bin/sha256sums
 } 2>&1 1>&3  | error
