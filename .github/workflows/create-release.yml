@@ -40,11 +40,7 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/IgorZev/SecTrails/releases/latest \
             | jq -r '.. | objects | select(.tag_name) | .tag_name')
-          
-          git tag -l
-          git describe
-          git describe v1.0.2
-          git status
+
 
           comms=$(git log $TAG_NAME..$tag --oneline)
 
