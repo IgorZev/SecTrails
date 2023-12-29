@@ -46,7 +46,7 @@ jobs:
           git describe v1.0.2
           git status
 
-          comms=$(git log origin/$TAG_NAME..$tag --oneline)
+          comms=$(git log $TAG_NAME..$tag --oneline)
 
           mkdir tmp
           chmod +x .github/prepare-notes.sh
