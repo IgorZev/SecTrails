@@ -29,6 +29,11 @@ jobs:
 
       - name: "Prepare notes"
         run: |
+          BASE_SHA=$(git rev-parse $GITHUB_BASE_REF)
+          HEAD_SHA=$(git rev-parse HEAD)
+          echo "Base SHA: $BASE_SHA"
+          echo "Head SHA: $HEAD_SHA"
+
           mkdir tmp
           chmod +x .github/prepare-notes.sh
           ./.github/prepare-notes.sh $GITHUB_BASE_REF
