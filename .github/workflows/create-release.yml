@@ -20,7 +20,8 @@ jobs:
           ls -la
           chmod +x .github/prepare-release.sh
           ./.github/prepare-release.sh
-
+          ls -la bin
+          
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
