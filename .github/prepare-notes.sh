@@ -49,37 +49,36 @@ get_sec() {
     shift
     IN=("$@")
     vals=()
-    while IFS=',' read -r val1 val2 val3 rest; do
-        case $pos in
-            0)
-                vals+=("$val1") 
-            ;;
-            1)
-                vals+=("$val2") 
-            ;;
-            2)
-                vals+=("$val3") 
-            ;;
-            *) exit;;
-        esac
-    done < <(printf '%s\n' "${IN[@]}")
-    for i in "${vals[@]}"; do
-        echo "$i"
-    done
+    read -r val1 val2 val3 <<< "$(awk -F',' '{print $1,$2,$3}' <<< "${IN[@]}")"
+    case $pos in
+        0)
+            vals+=("$val1") 
+        ;;
+        1)
+            vals+=("$val2") 
+        ;;
+        2)
+            vals+=("$val3") 
+        ;;
+        *) exit;;
+    esac
+    echo "${vals[*]}"
 }
 
-types=$(get_sec 1 "${notes[@]}")
 
+types=$(get_sec 2 "${notes[@]}")
 
-for i in "${types[@]}"; do
-    echo "$i"
-done
 
 untypes=($(printf "%s\n" "${types[@]}" | sort -u | tr '\n' ' '))
 
 # Assembling notes
 
-echo "# Highlights" > tmp/notes.md
-for i in "${untypes[@]}"; do
+pattern="*!*"
 
+echo "# Highlights" > tmp/notes.md
+for key in "${!notes[@]}"; do
+    if [[ $(get_sec 1 ${notes[$key]}) == $pattern ]]; then
+        mess=$(get_sec 2 ${notes[$key]})
+        echo "- $key - ${mess[*]^}" >> tmp/notes.md
+    fi
 done
