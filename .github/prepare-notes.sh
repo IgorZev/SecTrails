@@ -1,6 +1,7 @@
 #!/bin/bash
 
 origin=$(git rev-parse $1)
+echo $1
 
 local=$(git rev-parse HEAD)
 
