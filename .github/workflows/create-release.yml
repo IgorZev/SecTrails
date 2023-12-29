@@ -29,8 +29,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
+          target: ${{ github.ref }}
         run: |
           gh release create "$tag" \
               --generate-notes \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              --target="${GITHUB_REF##*/}"
+              --title="${GITHUB_REPOSITORY#*/} ${tag#v}"
