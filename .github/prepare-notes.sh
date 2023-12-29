@@ -70,6 +70,7 @@ get_sec() {
 
 types=$(get_sec 1 "${notes[@]}")
 
+
 for i in "${types[@]}"; do
     echo "$i"
 done
