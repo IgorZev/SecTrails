@@ -30,6 +30,7 @@ jobs:
         env:
           tag: ${{ github.ref_name }}
         run: |
+          mkdir tmp
           chmod +x .github/prepare-notes.sh
           ./.github/prepare-notes.sh $tag
 
