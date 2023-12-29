@@ -21,10 +21,13 @@ jobs:
           chmod +x .github/prepare-release.sh
           ./.github/prepare-release.sh
           ls -la bin
-          
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: | 
-            bin/*
+
+      - name: "Create release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "$tag" \
+              --generate-notes \
+              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+              --targe="${GITHUB_REF##*/}"

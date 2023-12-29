@@ -14,7 +14,7 @@ error() {
 }
 
 
-printf "\033[1;33mCreating release\n\033[0m"
+printf "\033[1;33mCreating release files\n\033[0m"
 
 exec 3>&1
 {
