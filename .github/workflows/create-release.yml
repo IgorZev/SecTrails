@@ -42,6 +42,9 @@ jobs:
             | jq -r '.. | objects | select(.tag_name) | .tag_name')
           
           git tag -l
+          git describe
+          git describe v1.0.2
+          git status
 
           comms=$(git log origin/$TAG_NAME..$tag --oneline)
 
