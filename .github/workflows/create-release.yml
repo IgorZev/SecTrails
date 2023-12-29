@@ -14,8 +14,9 @@ jobs:
     steps:
       - name: "Prepare release"
         run: |
-          ls
-          .github/prepare-release.sh
+          ls -la
+          chmod +x .github/prepare-release.sh
+          ./.github/prepare-release.sh
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
